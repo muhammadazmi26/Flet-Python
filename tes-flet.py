@@ -29,33 +29,48 @@ def main(page):
     kolomNIM = ft.TextField(label="NIM", width=300)
     kolomJurusan = ft.TextField(label="Jurusan", width=300)
 
-    page.add(
-        ft.Row(
-            [
-                ft.Column(
-                    [
-                        ft.Row([
-                            ft.Text(
-                                value="FORM MAHASISWA",
-                                style=ft.TextThemeStyle.HEADLINE_SMALL,
-                            ),
-                        ], height=50),
-                        ft.Column(
-                            [
-                                kolomNama, kolomNIM, kolomJurusan,
-                                ft.ElevatedButton(
-                                    "Simpan", on_click=simpanData),
-                                tempatPesan
-                            ],
-                        ),
-                    ],
-                ),
-            ],
-            alignment=ft.MainAxisAlignment.CENTER,
-        ),
-        ft.Text(value="Nama Yang Terakhir Di Entry Adalah " +
-                page.client_storage.get("nama"))
+    view = ft.Column(
+        [
+            ft.Row(
+                [
+                    ft.Text(
+                        value="FORM MAHASISWA",
+                        style=ft.TextThemeStyle.HEADLINE_SMALL,
+                    )
+                ],
+                alignment=ft.MainAxisAlignment.CENTER,
+                height=50
+            ),
+            ft.Row(
+                [
+                    ft.Column(
+                        [
+                            kolomNama, kolomNIM, kolomJurusan,
+                        ],
+                    ),
+                ],
+                alignment=ft.MainAxisAlignment.CENTER
+            ),
+            ft.Row(
+                [
+                    ft.ElevatedButton(
+                        "Simpan", on_click=simpanData),
+                ],
+                alignment=ft.MainAxisAlignment.CENTER,
+            ),
+            ft.Row(
+                [
+                    tempatPesan
+                ],
+                alignment=ft.MainAxisAlignment.CENTER
+            ),
+            ft.Text(value="Nama Yang Terakhir Di Entry Adalah " +
+                    page.client_storage.get("nama"))
+        ]
     )
+
+    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+    page.add(view)
 
 
 ft.app(target=main)
